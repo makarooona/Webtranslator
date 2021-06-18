@@ -1,0 +1,12 @@
+{
+    "name": "ibrahim/webtranslator",
+    "description": "translation system for intro to web course",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "mkarooona",
+            "email": "ibrahimtanicho@gmail.com"
+        }
+    ],
+    "require": {}
+}
