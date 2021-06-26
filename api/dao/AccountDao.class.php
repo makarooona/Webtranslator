@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__)."/BaseDao.class.php";
 
-class Account extends BaseDao{
+class AccountDao extends BaseDao{
 
     public function __construct(){
         parent::__construct("accounts");
@@ -17,10 +17,6 @@ class Account extends BaseDao{
                              LIMIT ${limit} OFFSET ${offset}",
                              ["name" => strtolower($search)]);
       }
-    
-
-
-
 }
 ?>
 
