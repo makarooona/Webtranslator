@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 require dirname(__FILE__).'/../vendor/autoload.php';
 
+
+
+
 Flight::route('/', function(){
     echo 'hello world!';
 });
@@ -12,7 +15,6 @@ Flight::route('/', function(){
 Flight::route('/hello2', function(){
     echo 'hello world2!';
 });
-
 
 Flight::start();
 ?>
