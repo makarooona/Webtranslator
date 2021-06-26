@@ -27,4 +27,5 @@ Flight::register('userService', 'UserService');
 Flight::register('reviewService', 'ReviewService');
 
 Flight::start();
+
 ?>

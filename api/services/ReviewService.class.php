@@ -7,19 +7,18 @@ class ReviewService extends BaseService{
     $this->dao = new ReviewDao();
     }
 
-    public function get_reviews($search, $offset, $limit, $order){
-        if ($search){
-          return $this->dao->get_reviews($search, $offset, $limit, $order);
-        }else{
-          return $this->dao->get_all($offset, $limit, $order);
+    // public function get_reviews($search, $offset, $limit, $order){
+    //     if ($search){
+    //       return $this->dao->get_reviews($search, $offset, $limit, $order);
+    //     }else{
+    //       return $this->dao->get_all($offset, $limit, $order);
+    //     }
+    //   }
+    public function get_reviews(){
+          return $this->dao->get_all();
         }
-      }
+      
     
-    public function get_all_reviews(){
-        return $this->dao->get_all_reviews();
-    } 
-
-
     public function add($review){
         // validation of review data
         if (!isset($review['name'])) throw new Exception("Name is missing");
