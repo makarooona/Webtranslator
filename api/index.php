@@ -16,6 +16,16 @@ Flight::map('query', function($name, $default_value = NULL){
     return urldecode($query_param);
   });
 
+Flight::route('GET /swagger', function(){
+    $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
+    header('Content-Type: application/json');
+    echo $openapi->toJson();
+});
+  
+Flight::route('GET /', function(){
+    Flight::redirect('/docs');
+});
+
 
 /* include all routes */
 require_once dirname(__FILE__)."/routes/reviews.php";
