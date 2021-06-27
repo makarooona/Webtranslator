@@ -18,7 +18,6 @@
  *      @OA\Response(response="200", description="List accounts from database")
  * )
  */
-
 Flight::route('GET /admin/accounts', function () {
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 25);
