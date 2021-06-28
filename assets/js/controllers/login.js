@@ -42,20 +42,24 @@ class Login {
       $("#register-form-container").addClass("hidden");
       $("#form-alert").removeClass("hidden")
       $("#form-alert .alert").html(data.message);
+      toastr.success("you have registered successfully");
+
+      window.location = "login.html";
     }, function(jqXHR, textStatus, errorThrown){
       $("#register-link").prop('disabled',false);
-      toastr.error(jqXHR.responseJSON.message);
+      toastr.error(errorThrown);
     });
   }
 
   static login(){
     $("#login-link").prop('disabled',true);
     RestClient.post("api/login", AUtils.form2json("#login-form"), function( data ) {
+      toastr.success("Welcome");
       window.localStorage.setItem("token", data.token);
       window.location = "index.html";
     }, function(jqXHR, textStatus, errorThrown){
       $("#login-link").prop('disabled',false);
-      toastr.error(error.responseJSON.message);
+      toastr.error(errorThrown);
     });
   }
 
@@ -68,7 +72,7 @@ class Login {
     }, function(jqXHR, textStatus, errorThrown){
       $("#forgot-link").prop('disabled',false);
       $("#forgot-form-container").addClass("hidden");
-      toastr.error(error.responseJSON.message);
+      toastr.error(errorThrown);
     });
   }
 
@@ -79,7 +83,7 @@ class Login {
       window.location = "index.html";
     }, function(jqXHR, textStatus, errorThrown){
       $("#change-link").prop('disabled',false);
-      toastr.error(error.responseJSON.message);
+      toastr.error(errorThrown);
     });
   }
 }
