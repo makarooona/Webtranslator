@@ -7,10 +7,43 @@ class Config{
 
 
     
-    const DB_HOST = "localhost";
-    CONST DB_USERNAME = "webtranslator";
-    CONST DB_PASSWORD = "webtranslator";
-    CONST DB_SCHEME = "webtranslator";
+    public static function DB_HOST(){
+      return Config::get_env("DB_HOST", "localhost");
+    }
+    public static function DB_USERNAME(){
+      return Config::get_env("DB_USERNAME", "webtranslator");
+    }
+    public static function DB_PASSWORD(){
+      return Config::get_env("DB_PASSWORD", "webtranslator");
+    }
+    public static function DB_SCHEME(){
+      return Config::get_env("DB_SCHEME", "webtranslator");
+    }
+    public static function DB_PORT(){
+      return Config::get_env("DB_PORT", "3306");
+    }
+    public static function SMTP_HOST(){
+      return Config::get_env("SMTP_HOST", "smtp.mailgun.org");
+    }
+    public static function SMTP_PORT(){
+      return Config::get_env("SMTP_PORT", "587");
+    }
+    public static function SMTP_USER(){
+      return Config::get_env("SMTP_USER", null);
+    }
+    public static function SMTP_PASSWORD(){
+      return Config::get_env("SMTP_PASSWORD", null);
+    }
+
+
+
+
+    const JWT_SECRET = "y4KvQcZVqn3F7uxQvcFk";
+    const JWT_TOKEN_TIME = 604800;
+  
+    public static function get_env($name, $default){
+      return isset($_ENV[$name]) && trim($_ENV[$name]) != '' ? $_ENV[$name] : $default;
+    }
 }
 
 ?>
