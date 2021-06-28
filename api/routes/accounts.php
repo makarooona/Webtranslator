@@ -1,10 +1,9 @@
 <?php
 /* Swagger documentation */
 /** 
- *        @OA\Info(title="Webtranslator BizNet API", version="0.2")
+ *        @OA\Info(title="Webtranslator BizNet API", version="0.1")
  *        @OA\OpenApi(
  *        @OA\Server(url="http://localhost/webtranslator/api/", description="Development Environment" ),
- *        @OA\Server(url="https://webtranslator.biznet.ba/api/", description="Production Environment" )
  *        ),
  *        @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authentication" )
  */
@@ -28,7 +27,7 @@ Flight::route('GET /admin/accounts', function () {
 });
 
 /**
- * @OA\Get(path="/admin/accounts/{id}", tags={"x-admin", "account"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Get(path="/admin/accounts/{id}", tags={"x-admin", "account"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
@@ -38,10 +37,10 @@ Flight::route('GET /admin/accounts/@id', function ($id) {
 });
 
 /**
- * @OA\Post(path="/admin/accounts", tags={"x-admin", "account"}, security={{"ApiKeyAuth": {}}},
- * @OA\RequestBody(description="Basic account info", required=true,
- * @OA\MediaType(mediaType="application/json",
- *=@OA\Schema(
+ *       @OA\Post(path="/admin/accounts", tags={"x-admin", "account"}, security={{"ApiKeyAuth": {}}},
+ *      @OA\RequestBody(description="Basic account info", required=true,
+ *      @OA\MediaType(mediaType="application/json",
+ *      =@OA\Schema(
  *                     @OA\Property(property="name", required="true", type="string", example="My Test Account",    description="Name of the account" ),
  *                     @OA\Property(property="status", type="string", example="ACTIVE",    description="Account status" )
  *          )
@@ -81,8 +80,5 @@ Flight::route('PUT /admin/accounts/@id', function ($id) {
 Flight::route('GET /user/account', function () {
     Flight::json(Flight::accountService()->get_by_id(Flight::get('user')['aid']));
 });
-
-?>
-
 
 ?>
