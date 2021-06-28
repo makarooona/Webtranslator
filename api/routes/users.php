@@ -1,9 +1,9 @@
 <?php
 /**
- * @OA\Post(path="/register", tags={"login"},
+ *   @OA\Post(path="/register", tags={"login"},
  *   @OA\RequestBody(description="Basic user info", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
+ *   @OA\MediaType(mediaType="application/json",
+ *    	@OA\Schema(
  *    				 @OA\Property(property="account", required="true", type="string", example="My Test Account",	description="Name of the account" ),
  *     				 @OA\Property(property="name", required="true", type="string", example="First Last Name",	description="Name of the user`" ),
  *    				 @OA\Property(property="email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" ),
@@ -31,32 +31,33 @@ Flight::route('GET /confirm/@token', function($token){
 });
 
 /**
- * @OA\Post(path="/login", tags={"login"},
- *   @OA\RequestBody(description="Basic user info", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
- *    				 @OA\Property(property="email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" ),
- *             @OA\Property(property="password", required="true", type="string", example="12345",	description="Password" )
- *          )
- *       )
+ *    @OA\Post(path="/login", tags={"login"},
+ *    @OA\RequestBody(description="Basic user info", required=true,
+ *    @OA\MediaType(mediaType="application/json",
+ *    @OA\Schema(
+ *      @OA\Property(property="email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" ),
+ *      @OA\Property(property="password", required="true", type="string", example="12345",	description="Password" )
+ *     )
+ *     )
  *     ),
- *  @OA\Response(response="200", description="Message that user has been created.")
+ *      @OA\Response(response="200", description="Message that user has been created.")
  * )
  */
+
 Flight::route('POST /login', function(){
   Flight::json(Flight::jwt(Flight::userService()->login(Flight::request()->data->getData())));
 });
 
 /**
- * @OA\Post(path="/forgot", tags={"login"}, description="Send recovery URL to users email address",
- *   @OA\RequestBody(description="Basic user info", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
- *    				 @OA\Property(property="email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" )
- *          )
- *       )
+ *     @OA\Post(path="/forgot", tags={"login"}, description="Send recovery URL to users email address",
+ *     @OA\RequestBody(description="Basic user info", required=true,
+ *     @OA\MediaType(mediaType="application/json",
+ *     @OA\Schema(
+ *     @OA\Property(property="email", required="true", type="string", example="myemail@gmail.com",	description="User's email address" )
+ *     )
+ *     )
  *     ),
- *  @OA\Response(response="200", description="Message that recovery link has been sent.")
+ *      @OA\Response(response="200", description="Message that recovery link has been sent.")
  * )
  */
 Flight::route('POST /forgot', function(){
@@ -66,16 +67,16 @@ Flight::route('POST /forgot', function(){
 });
 
 /**
- * @OA\Post(path="/reset", tags={"login"}, description="Reset users password using recovery token",
- *   @OA\RequestBody(description="Basic user info", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
- *    				 @OA\Property(property="token", required="true", type="string", example="123",	description="Recovery token" ),
- *    				 @OA\Property(property="password", required="true", type="string", example="123",	description="New password" )
- *          )
- *       )
+ *    @OA\Post(path="/reset", tags={"login"}, description="Reset users password using recovery token",
+ *    @OA\RequestBody(description="Basic user info", required=true,
+ *    @OA\MediaType(mediaType="application/json",
+ *    @OA\Schema(
+ *    @OA\Property(property="token", required="true", type="string", example="123",	description="Recovery token" ),
+ *    @OA\Property(property="password", required="true", type="string", example="123",	description="New password" )
+ *     )
+ *     )
  *     ),
- *  @OA\Response(response="200", description="Message that user has changed password.")
+ *      @OA\Response(response="200", description="Message that user has changed password.")
  * )
  */
 Flight::route('POST /reset', function(){

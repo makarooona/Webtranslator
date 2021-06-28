@@ -10,11 +10,10 @@ require_once dirname(__FILE__).'/services/ReviewService.class.php';
 
 Flight::set('flight.log_errors', TRUE);
 
-/* error handling for our API */
-Flight::map('error', function(Exception $ex){
-  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
-
+// /* error handling for our API */
+// Flight::map('error', function(Exception $ex){
+//   Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
+// });
 
 /* utility function for reading query parameters from URL */
 Flight::map('query', function($name, $default_value = NULL){
@@ -51,6 +50,8 @@ Flight::route('GET /', function(){
 require_once dirname(__FILE__)."/routes/reviews.php";
 require_once dirname(__FILE__)."/routes/accounts.php";
 require_once dirname(__FILE__)."/routes/users.php";
+require_once dirname(__FILE__)."/routes/middleware.php";
+
 
 Flight::register('accountService', 'AccountService');
 Flight::register('userService', 'UserService');

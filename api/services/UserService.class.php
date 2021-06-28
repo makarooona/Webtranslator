@@ -3,6 +3,7 @@ require_once dirname(__FILE__). '/BaseService.class.php';
 require_once dirname(__FILE__).'/../dao/UserDao.class.php';
 require_once dirname(__FILE__).'/../dao/AccountDao.class.php';
 require_once dirname(__FILE__).'/../clients/SMPTClient.class.php';
+
 class UserService extends BaseService{
 
   private $accountDao;
@@ -37,12 +38,12 @@ class UserService extends BaseService{
     $db_user = $this->update($db_user['id'], ['token' => md5(random_bytes(16)), 'token_created_at' => date(Config::DATE_FORMAT)]);
 
     // send email
-    //$this->smtpClient->send_user_recovery_token($db_user);
+    // $this->smtpClient->send_user_recovery_token($db_user);
   }
 
   public function login($user){
     $db_user = $this->dao->get_user_by_email($user['email']);
-
+    
     if (!isset($db_user['id'])) throw new Exception("User doesn't exists", 400);
 
     if ($db_user['status'] != 'ACTIVE') throw new Exception("Account not active", 400);
@@ -58,6 +59,7 @@ class UserService extends BaseService{
   public function register($user){
     if (!isset($user['account'])) throw new Exception("Account field is required");
 
+    
     try {
       $this->dao->beginTransaction();
       $account = $this->accountDao->add([
@@ -86,7 +88,7 @@ class UserService extends BaseService{
       }
     }
 
-    //  $this->smtpClient->send_register_user_token($user);
+      // $this->smtpClient->send_register_user_token($user);
 
     return $user;
   }

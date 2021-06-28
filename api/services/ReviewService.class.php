@@ -7,27 +7,26 @@ class ReviewService extends BaseService{
     $this->dao = new ReviewDao();
     }
 
-    // public function get_reviews($search, $offset, $limit, $order){
-    //     if ($search){
-    //       return $this->dao->get_reviews($search, $offset, $limit, $order);
-    //     }else{
-    //       return $this->dao->get_all($offset, $limit, $order);
-    //     }
-    //   }
-    
-    public function get_reviews(){
-          return $this->dao->get_all();
-        }
-      
-    
-    public function add($review){
-        // validation of review data
-        if (!isset($review['name'])) throw new Exception("Name is missing");
-        $review['created_at'] = date(Config::DATE_FORMAT);
-        return parent::add($review);
-      }
-
+    public function get_reviews( $status, $offset, $limit, $search, $order){
+      return $this->dao->get_reviews($status, $offset, $limit, $search, $order);
     }
-
+  
+ 
+  public function add_reviews($user, $review){
+ 
+    try {
+      $review['account_id'] = $user['aid'];
+      $review['user_id'] = $user['id'];
+      $review['created_at'] = date(Config::DATE_FORMAT);
+      return parent::add($review);
+    } catch (\Exception $e) {
+      if (str_contains($e->getMessage(), 'campaigns.uq_campaign_name')) {
+        throw new Exception("Campaign with same name already exists", 400, $e);
+      }else{
+        throw new Exception($e->getMessage(), 400, $e);
+      }
+    }
+  }
+}
 
 ?>
